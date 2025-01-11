@@ -387,7 +387,7 @@ int executNiveau(Joueur *j, Niveau* niv);
  * 
  * @param j Joueur concerné.
  */
-void Lancement(Joueur j);
+void Lancement(Joueur* j);
 
 /**
  * @brief Crée un monstre dans un niveau donné.

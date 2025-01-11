@@ -192,7 +192,7 @@ void testlancement(){
     Joueur j;
     strcpy(j.pseudo,"drxzm");
     j.score=0;
-    Lancement(j);
+    Lancement(&j);
 }
 
 void testPositionInsertionScore(void) {
@@ -331,7 +331,7 @@ void testScore() {
 
 void testJeu() {
     Joueur j = {"swayd", 20, 1, 2, 200};
-    Lancement(j);
+    Lancement(&j);
 }
 
 void test_chargeScore() {

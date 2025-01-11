@@ -432,11 +432,13 @@ int Menu(void){
     AffiJaune("\t 2. Afficher la liste des joueurs triée par nom\n");
     AffiJaune("\t 3. Afficher la liste des joueurs triée par meilleur score\n");
     AffiJaune("\t 4. Afficher les statistiques d'un joueur\n");
+    AffiJaune("\t 5. Afficher vos statistiques\n");
+    AffiJaune("\t 6. Changer de joueur\n");
     AffiGris("\t 9. Quitter\n");
     AffiViolet("|-_-_-_-_-_-_-_-_-_-_-_-_-_-|\n");
     AffiBlancGras("Choix : ");
     fgets(choix,200,stdin);
-    while(choix[0]!='1' && choix[0]!='2' && choix[0]!='3' && choix[0]!='4' && choix[0]!='9'){
+    while(choix[0]!='1' && choix[0]!='2' && choix[0]!='3' && choix[0]!='4'&& choix[0]!='5' && choix[0]!='6' && choix[0]!='9'){
         AffiBlancGras("Votre choix n'était pas bon, réessayez : ");
         fgets(choix,200,stdin);
     }
@@ -557,14 +559,16 @@ int executNiveau(Joueur *j,Niveau* niv){
     return 0;
 }
 
-void Lancement(Joueur j){
+void Lancement(Joueur *j){
     int choix;
     choix=Menu();
-    if (choix==9) Sortie(j);
-    if (choix==1) Partie(j);
-    if (choix==2) ListeParNom(j);
-    if (choix==3) ListeParScore(j);
+    if (choix==9) Sortie(*j);
+    if (choix==1) Partie(*j);
+    if (choix==2) ListeParNom(*j);
+    if (choix==3) ListeParScore(*j);
     if (choix==4) StatJoueur();
+    if (choix==5) AffichStatJoueur(*j);
+    if (choix==6){strcpy(j->pseudo,DemandePseudo()); inititJoueur(j->pseudo);}
 }
 
 void StatJoueur(void){
@@ -816,6 +820,6 @@ void global(void) {
     AffiRouge("\n\nA partir d'ici, les réponses attendues sont en MAJUSCULE !\n\n");
     while(true){
         j = inititJoueur(j.pseudo);
-        Lancement(j);
+        Lancement(&j);
     }
 }
