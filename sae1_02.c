@@ -218,7 +218,6 @@ void ajouterJoueur(Joueur j){
     fprintf(flot,"%d\n",taille);
     triDicho(tab,taille);
     for(ind=0;ind<taille;ind++){
-        printf("%s",tab[ind]);
         fprintf(flot,"%s\n",tab[ind]);
         }
     fclose(flot);
