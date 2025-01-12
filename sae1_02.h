@@ -49,7 +49,12 @@ typedef struct fmonstre{
     struct fmonstre *suiv; 
 }Fmonstre,*FileM;
 
-
+/**
+ * @brief Donne un bonus au joueur
+ * 
+ * @param j Pointeur vers un joueur.
+ */
+void ChoixBonus(Joueur* j);
 
 
 /**

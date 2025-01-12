@@ -456,9 +456,8 @@ void Sortie(Joueur j){
 
 void finPartie(Joueur j){
     char string[70];
-    if (j.pdv<=0){
-        AffiRouge("\n Vous êtes mort .... \n\n");
-    }
+    if (j.pdv<=0)AffiRouge("\n Vous êtes mort .... \n\n");
+    else AffiVert("\n Vous avez Gagné la partie !! \n\n");
     sprintf(string,"Enregistrement de la Partie avec votre score : %d points\n",j.score);
     AffiGris(string);
     sauvegarderNvScore(j,j.score);
@@ -502,6 +501,23 @@ Monstre creerMonstre(Niveau* niv,int num){
     }
     return m;
 }
+
+void ChoixBonus(Joueur* j){
+    char string[40],choix[30];
+    AffiJaune("\nVous avez gagner la manche, choisissez un bonus :\n");
+    AffiBleu("|1)--> Se soigner de 5 pdv\n|2)--> Faire 1 point de dégat supplémentaire\n");
+    AffiBlancGras("Choix : ");
+    fgets(choix,30,stdin);
+    while(choix[0]!='1' && choix[0]!='2'){
+        AffiBlancGras("Votre choix n'était pas bon, recommence : ");
+        fgets(choix,30,stdin);
+    }
+    printf("\n");
+    if(choix[0]=='1')j->pdv=j->pdv+5;
+    else j->nbDeg=j->nbDeg+1;
+}
+
+
 
 int executNiveau(Joueur *j,Niveau* niv){
     int ind,numM=1,ajtscore,numMmax;
@@ -556,6 +572,7 @@ int executNiveau(Joueur *j,Niveau* niv){
             
         }
     }
+    ChoixBonus(j);
     return 0;
 }
 
@@ -630,7 +647,6 @@ int ChoixArmeJ(Joueur j){
 
 int ArmeMonstre(int niveau){
     int ran;
-    srand(time(NULL));
     if(niveau==1)ran=rand()%4+1;
     if(niveau==2)ran=rand()%3+1;
     if(niveau==3)ran=rand()%5+1;
@@ -654,17 +670,17 @@ int Combat(Joueur j,Monstre m){
     }
     sprintf(string,"Le monstre (%s%d)-> %dpdv a choisi l'arme : ",m.nom,m.num,m.pdv);
     AffiViolet(string);
-    if(armeM==5){AffiBleu("Magique\n");return 0;}
-    if(armeM==1){
+    if(armeM==Pouvoir){AffiBleu("Magique\n");return 0;}
+    if(armeM==Pierre){
         AffiBleu("Pierre\n");
-        if (armeJ==3)return 0;}
-    if(armeM==2){
+        if (armeJ==Ciseaux)return 0;}
+    if(armeM==Feuille){
         AffiBleu("Feuille\n");
-        if(armeJ==1)return 0;}
-    if(armeM==3){
+        if(armeJ==Pierre)return 0;}
+    if(armeM==Ciseaux){
         AffiBleu("Ciseaux\n");
-        if(armeJ==2)return 0;}
-    if(armeM==4)AffiBleu("bonne à rien\n");
+        if(armeJ==Feuille)return 0;}
+    if(armeM==BonARien)AffiBleu("bonne à rien\n");
     return 1;
 }
 
@@ -812,6 +828,7 @@ Joueur inititJoueur(char *pseudo) {
 
 void global(void) {
     Bienvenue();
+    srand(time(NULL));
     Joueur j;
     AffichJoueurExistant();
     strcpy(j.pseudo,DemandePseudo());

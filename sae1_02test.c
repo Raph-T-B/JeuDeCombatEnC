@@ -376,8 +376,16 @@ void testStatJoueur(void){
 
 void testAjoutNouvJoueur(void){
     Joueur j;
-    strcpy(j.pseudo,"lilou");
+    strcpy(j.pseudo,"poule");
     AjoutNouvJoueur(j);
+}
+
+void testChoixBonus(void){
+    Joueur j;
+    j=inititJoueur("drxzm");
+    printf("nb_pdv : %d\nnb_degat : %d\n",j.pdv,j.nbDeg);
+    ChoixBonus(&j);
+    printf("nb_pdv : %d\nnb_degat : %d\n",j.pdv,j.nbDeg);
 }
 
 int main(void){
@@ -418,7 +426,7 @@ int main(void){
     //testAfficheTab();
     //testBienvenue();
     //testSortie();
-     //testFinPartie();
+    //testFinPartie();
     //testExecutNiveau();
     //testCreerMonstre();
     //testMenu();
@@ -431,8 +439,8 @@ int main(void){
     //testDemandePseudo();
     //testAjoutNouvJoueur();
     //StatJoueur();
+    //testChoixBonus();
     global();
     return 0;
 }
 
-//fini tes fonctions test
