@@ -1,4 +1,4 @@
-# SAE1.02
+# SAE1.02 (projet)
 ## EQUIPE :
 -FERRANDON Gabin
 -CAUMOND Raphaël
